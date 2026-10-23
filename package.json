@@ -1,0 +1,11 @@
+{
+  "name": "nasid",
+  "version": "0.1.0-alpha.1",
+  "private": true,
+  "description": "Interface móvel demonstrativa com dados fictícios",
+  "scripts": {
+    "dev": "node server.mjs",
+    "build": "node scripts/build.mjs",
+    "check": "node --check js/app.js && node --check server.mjs && node --check scripts/build.mjs"
+  }
+}
