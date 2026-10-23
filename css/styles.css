@@ -59,7 +59,7 @@ svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width:
 .identity-fields small { display: block; font-size: 9px; line-height: 13px; }
 /* Campo Nome: o aviso faz parte do texto, nunca do arquivo de textura. */
 .identity-body .identity-fields > p:first-child { font-family: Arial, Helvetica, sans-serif; font-size: 11px; font-weight: 400; line-height: 15px; }
-.signature { position: absolute; bottom: 18px; left: 30px; font-family: cursive; font-size: 17px; }
+.signature { position: absolute; bottom: 18px; left: 30px; right: 30px; text-align: center; font-family: cursive; font-size: 17px; }
 .signature small { display: block; font: 9px Arial, sans-serif; margin-top: 6px; }
 .document-controls { height: 72px; flex-shrink: 0; display: flex; justify-content: space-between; align-items: center; margin: 0 16px; gap: 10px; }
 .zoom-button { border-radius: 20px; background: #eee; color: #777; width: 54px; height: 54px; box-shadow: 0 2px 3px #0002; }
