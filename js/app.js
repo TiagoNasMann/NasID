@@ -3,15 +3,15 @@
 
 // Todos os dados abaixo são fictícios; o identificador não é um CPF válido.
 const identity = Object.freeze({
-  name: 'DOCUMENTO DEMONSTRATIVO',
-  number: '000.000.000-00',
-  birth: '01/01/2000',
-  birthplace: 'Cidade Exemplo/XX',
+  name: 'TIAGO NASCIMENTO FAGUNDES',
+  number: '70475572610',
+  birth: '04/06/2007',
+  birthplace: 'UBERLANDIA/MG',
   nationality: 'BRA',
   sex: 'M',
-  expires: '01/01/2035',
-  mother: 'MARIA EXEMPLO',
-  father: 'JOÃO EXEMPLO',
+  expires: '27/08/2036',
+  mother: 'VALÉRIA SILVEIRA TILLMANN',
+  father: 'FÁBIO SILVEIRA TILLMANN',
 });
 
 const PHOTO_KEY = 'wallet-demo.portrait.v1';
@@ -81,18 +81,18 @@ function field(label, value, wide = false) {
 }
 
 function frontCard() {
-  return `<article class="identity-card" aria-label="Frente da identidade"><span class="document-emblem"><img src="assets/brasao-republica.png" alt="Brasão da República" /></span><header class="document-header"><strong>REPÚBLICA FEDERATIVA DO BRASIL</strong><span class="document-government">GOVERNO FEDERAL</span>Estado Exemplo<br>ÓRGÃO EXEMPLO<h2>CARTEIRA DE IDENTIDADE</h2></header><div class="identity-body"><button class="portrait-button" data-action="photo" aria-label="Alterar foto da identidade"><img src="${portrait}" alt="Foto da identidade"/></button><div class="identity-fields">${field('Nome / Name', identity.name, true)}${field('Nome Social / Social Name', '—', true)}${field('Registro Geral - CPF / Personal Number', identity.number)}${field('Sexo / Sex', identity.sex)}${field('Data de Nascimento / Date of Birth', identity.birth)}${field('Nacionalidade / Nationality', identity.nationality)}${field('Naturalidade / Place of Birth', identity.birthplace)}${field('Validade / Expiry', identity.expires)}</div></div><div class="signature">Lucas Exemplo<small>Assinatura do Titular / Cardholder’s Signature</small></div></article>`;
+  return `<article class="identity-card" aria-label="Frente da identidade"><span class="document-emblem"><img src="assets/brasao-republica.png" alt="Brasão da República" /></span><header class="document-header"><strong>REPÚBLICA FEDERATIVA DO BRASIL</strong><span class="document-government">GOVERNO FEDERAL</span>Estado de Minas Gerais<br>Polícia Civil do Estado de Minas Gerais<h2>CARTEIRA DE IDENTIDADE</h2></header><div class="identity-body"><button class="portrait-button" data-action="photo" aria-label="Alterar foto da identidade"><img src="${portrait}" alt="Foto da identidade"/></button><div class="identity-fields">${field('Nome / Name', identity.name, true)}${field('Nome Social / Social Name', '—', true)}${field('Registro Geral - CPF / Personal Number', identity.number)}${field('Sexo / Sex', identity.sex)}${field('Data de Nascimento / Date of Birth', identity.birth)}${field('Nacionalidade / Nationality', identity.nationality)}${field('Naturalidade / Place of Birth', identity.birthplace)}${field('Validade / Expiry', identity.expires)}</div></div><div class="signature">Cauà Tillmann<small>Assinatura do Titular / Cardholder’s Signature</small></div></article>`;
 }
 
 function reverseCard() {
-  return `<article class="identity-card back-card"><div class="reverse-top"><img class="reverse-qr" src="assets/identity-qr.svg" alt="QR Code dos dados fictícios"/><div class="identity-fields">${field('Filiação / Filiation', `${identity.mother}<br><br>${identity.father}`, true)}${field('Órgão Expedidor / Card Issuer', 'ÓRGÃO EXEMPLO / XX', true)}${field('Local / Place of Issue', identity.birthplace)}${field('Data de Emissão / Issue Date', '01/01/2025')}</div><img class="reverse-portrait" src="${portrait}" alt="Foto da identidade"/></div><div class="reverse-signature">João Exemplo<small>Assinatura do Expedidor / Card Issuer’s Signature</small></div><div class="document-code" aria-label="Identificador fictício">EXEMPLO00000000000&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;<br>0000000XXX0000000&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;<br>LUCAS&lt;EXEMPLO&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</div></article>`;
+  return `<article class="identity-card back-card"><div class="reverse-top"><img class="reverse-qr" src="assets/identity-qr.svg" alt="QR Code dos dados fictícios"/><div class="identity-fields">${field('Filiação / Filiation', `${identity.mother}<br><br>${identity.father}`, true)}${field('Órgão Expedidor / Card Issuer', 'Polícia Civil do Estado de Minas Gerais', true)}${field('Local / Place of Issue', identity.birthplace)}${field('Data de Emissão / Issue Date', '24/06/2025')}</div><img class="reverse-portrait" src="${portrait}" alt="Foto da identidade"/></div><div class="reverse-signature">Cauà Tillmann<small>Assinatura do Expedidor / Card Issuer’s Signature</small></div><div class="document-code" aria-label="Identificador fictício">IDBRA707642696770764269607&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;<br>8947920019201290123BRA&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;<br>TILLMANN&lt;SILVEIRA&lt;CAUA&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</div></article>`;
 }
 
 function supplementaryCard() {
   const cells = [
     ['Título de eleitor', '—'], ['Tipo sanguíneo / Fator RH', '—'],
     ['Estado civil', 'SOLTEIRO(A)'], ['Doador de órgãos', 'NÃO'],
-    ['Assinatura', 'Lucas Exemplo'], ['Certidão de Nasc. / Casamento / Averbação / Divórcio', 'TIPO: NASCIMENTO · LIVRO: EXEMPLO · FOLHA: 00'],
+    ['Assinatura', 'Cauà Tillmann'], ['Certidão de Nasc. / Casamento / Averbação / Divórcio', 'TIPO: NASCIMENTO · LIVRO: EXEMPLO · FOLHA: 00'],
     ['CNH', '—'], ['Categoria', '—'], ['NIS', '—'], ['NIT', '—'],
     ['PIS / PASEP', '—'], ['Carteira de trabalho', '—'], ['DNI', '—'], ['CNS', '—'], ['Observação de saúde', '—'],
   ];
@@ -166,9 +166,17 @@ function setupCarousel() {
   const stage = document.querySelector('.document-stage');
   if (!stage) return;
   stage.scrollLeft = stage.clientWidth * documentPage;
+  let indicatorFrame = 0;
   stage.addEventListener('scroll', () => {
-    documentPage = Math.round(stage.scrollLeft / stage.clientWidth);
-    updatePageIndicators();
+    if (indicatorFrame) return;
+    indicatorFrame = requestAnimationFrame(() => {
+      indicatorFrame = 0;
+      if (!stage.isConnected || !stage.clientWidth) return;
+      const page = Math.max(0, Math.min(3, Math.round(stage.scrollLeft / stage.clientWidth)));
+      if (page === documentPage) return;
+      documentPage = page;
+      updatePageIndicators();
+    });
   }, { passive: true });
   stage.addEventListener('keydown', event => {
     if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
@@ -178,14 +186,23 @@ function setupCarousel() {
   });
   // O toque usa rolagem nativa; o mouse recebe o mesmo gesto de arraste.
   let drag = null;
+  let coastFrame = 0;
+  let suppressClick = false;
   stage.addEventListener('pointerdown', event => {
+    cancelAnimationFrame(coastFrame);
+    suppressClick = false;
     if (event.pointerType !== 'mouse' || event.button !== 0) return;
-    drag = { start: event.clientX, left: stage.scrollLeft, moved: false };
+    drag = { start: event.clientX, left: stage.scrollLeft, moved: false, x: event.clientX, time: performance.now(), velocity: 0 };
   });
   stage.addEventListener('pointermove', event => {
     if (!drag || !(event.buttons & 1)) return;
     const distance = event.clientX - drag.start;
-    if (Math.abs(distance) > 8) {
+    if (drag.moved || Math.abs(distance) > 3) {
+      const now = performance.now();
+      const elapsed = Math.max(1, now - drag.time);
+      drag.velocity = .65 * ((drag.x - event.clientX) / elapsed) + .35 * drag.velocity;
+      drag.x = event.clientX;
+      drag.time = now;
       drag.moved = true;
       stage.classList.add('dragging');
       stage.setPointerCapture(event.pointerId);
@@ -194,11 +211,30 @@ function setupCarousel() {
   });
   stage.addEventListener('pointerup', () => {
     if (!drag) return;
-    const moved = drag.moved;
+    suppressClick = drag.moved;
+    let velocity = performance.now() - drag.time < 80 ? drag.velocity : 0;
+    let previous = performance.now();
     drag = null;
     stage.classList.remove('dragging');
-    if (moved) goToDocumentPage(Math.round(stage.scrollLeft / stage.clientWidth));
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const coast = now => {
+      if (!stage.isConnected) return;
+      const elapsed = Math.min(32, now - previous);
+      previous = now;
+      const before = stage.scrollLeft;
+      stage.scrollLeft += velocity * elapsed;
+      velocity *= Math.exp(-elapsed / 180);
+      if (Math.abs(velocity) > .02 && Math.abs(stage.scrollLeft - before) > .1) coastFrame = requestAnimationFrame(coast);
+    };
+    if (Math.abs(velocity) > .02) coastFrame = requestAnimationFrame(coast);
   });
+  stage.addEventListener('click', event => {
+    if (!suppressClick) return;
+    suppressClick = false;
+    event.preventDefault();
+    event.stopPropagation();
+  }, true);
+  stage.addEventListener('wheel', () => cancelAnimationFrame(coastFrame), { passive: true });
   stage.addEventListener('pointercancel', () => { drag = null; stage.classList.remove('dragging'); });
   stage.addEventListener('dragstart', event => event.preventDefault());
 }
