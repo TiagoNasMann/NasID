@@ -72,9 +72,34 @@ function homeScreen() {
   return `<section class="account-banner"><h1>Olá, <strong>LUCAS EXEMPLO</strong></h1><p>SUA CONTA É NÍVEL <strong>OURO</strong></p><button data-action="level">◉ VER NÍVEL</button></section><section class="home-content"><input class="search" type="search" placeholder="Encontre Serviços do Governo do Br..." aria-label="Buscar serviços"/><section class="service-panel"><h2 class="section-title">Serviços</h2>${rows}</section><section class="service-panel"><h2 class="section-title">Minha Conta</h2>${rows}</section></section>`;
 }
 
+const WALLET_KEY = 'wallet-demo.cover.v1';
+let walletDetails = { name: identity.name, number: identity.number };
+try {
+  const saved = JSON.parse(localStorage.getItem(WALLET_KEY));
+  if (typeof saved?.name === 'string' && typeof saved?.number === 'string') walletDetails = saved;
+} catch { /* O cartão também funciona sem armazenamento local. */ }
+const escapeText = value => String(value).replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
+
 function walletScreen() {
-  return `${title('Carteira de<br>documentos')}<section class="wallet-content"><button class="wallet-card" data-route="identity" aria-label="Abrir Carteira de Identidade"><img class="wallet-original" src="assets/wallet-cover.avif" alt="Carteira de Identidade — CPF"/></button><button class="green-button" data-action="add-document">Adicionar Documento</button></section>`;
+  return `${title('Carteira de documentos')}<section class="wallet-content"><button class="wallet-card" data-route="identity" aria-label="Abrir Carteira de Identidade"><span class="wallet-id">ID</span><span class="wallet-emblem" aria-hidden="true"><img src="assets/brasao-republica.png" alt=""/></span><span class="wallet-copy"><strong>Carteira de Identidade</strong><span>${escapeText(walletDetails.name)}</span><span class="wallet-cpf-label">CPF</span><span>${escapeText(walletDetails.number)}</span></span></button><button class="wallet-edit" data-action="edit-wallet">Editar dados do cartão</button><button class="green-button" data-action="add-document">Adicionar documento</button></section>`;
 }
+
+function openWalletEditor() {
+  document.querySelector('#wallet-name').value = walletDetails.name;
+  document.querySelector('#wallet-number').value = walletDetails.number;
+  document.querySelector('#wallet-dialog').showModal();
+}
+document.querySelector('#wallet-form').addEventListener('submit', event => {
+  event.preventDefault();
+  walletDetails = {
+    name: document.querySelector('#wallet-name').value.trim(),
+    number: document.querySelector('#wallet-number').value.trim(),
+  };
+  try { localStorage.setItem(WALLET_KEY, JSON.stringify(walletDetails)); }
+  catch { toast('Dados atualizados nesta sessão; armazenamento indisponível.'); }
+  document.querySelector('#wallet-dialog').close();
+  navigate('wallet', false);
+});
 
 function field(label, value, wide = false) {
   return `<p class="${wide ? 'wide' : ''}"><small>${label}</small>${value}</p>`;
@@ -132,6 +157,7 @@ function navigate(nextRoute, updateHistory = true) {
   headerAction.innerHTML = icon(route === 'identity' ? 'close' : 'user');
   headerAction.dataset.route = route === 'identity' ? 'wallet' : 'data';
   headerAction.setAttribute('aria-label', route === 'identity' ? 'Fechar documento' : 'Meus dados');
+  document.querySelector('.mobile-app').classList.toggle('wallet-view', route === 'wallet');
   renderNavigation();
   screen.scrollTop = 0;
   if (updateHistory) history.pushState(null, '', `#${route}`);
@@ -273,6 +299,7 @@ document.addEventListener('click', event => {
   }
   switch (button.dataset.action) {
     case 'photo': openPhotoEditor(); break;
+    case 'edit-wallet': openWalletEditor(); break;
     case 'next-page': goToDocumentPage((documentPage + 1) % 4); break;
     case 'zoom': {
       const stage = document.querySelector('.document-stage');
